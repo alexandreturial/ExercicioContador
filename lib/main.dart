@@ -23,21 +23,19 @@ class _CouterScreenState extends State<CouterScreen> {
   var clicks = 0;  
 
   void handleCount(Function countFunction){
-    countFunction();
-  }
-
-  void add(){
+    int counter = countFunction(clicks);
+    if(counter >= 0){
       setState(() {
-        clicks += 1;
-      });
-  }
-  void sub(){
-    if(clicks -1 >= 0){
-      setState(() {
-        clicks -=1;
+        clicks = counter;
       });
     }
-      
+  }
+
+  int add(counter){
+    return counter += 1;
+  }
+  int sub(counter){
+    return counter -= 1;
   }
 
   @override
