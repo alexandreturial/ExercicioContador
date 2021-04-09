@@ -1,4 +1,5 @@
 
+import 'package:aula5/Components/floatButton.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -11,6 +12,8 @@ void main(){
 
 
 class CouterScreen extends StatefulWidget {
+  
+
   @override
   _CouterScreenState createState() => _CouterScreenState();
 }
@@ -18,6 +21,14 @@ class CouterScreen extends StatefulWidget {
 class _CouterScreenState extends State<CouterScreen> {
 
   var clicks = 0;  
+
+  void handleCount(int click){
+    if(clicks + click >= 0){
+      setState(() {
+        clicks += click;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,38 +52,23 @@ class _CouterScreenState extends State<CouterScreen> {
             ))
           ],
         ),
+        
         floatingActionButton: Row(
+        
           mainAxisAlignment: MainAxisAlignment.end,
           
           children: [
-            Container(
-              margin: EdgeInsets.all(5),
-              child: FloatingActionButton(
+            FloatButton(
+              icon: Icons.remove,
+              pressed: () => handleCount(-1)
                 
-                onPressed: (){
-                  setState(() {
-                    if(clicks > 0){
-                        clicks -= 1;
-                    }
-                   
-                  });
-                },
-                child: Icon(Icons.remove),
-                
-              ),
             ),
-            Container(
-              margin: EdgeInsets.all(5),
-              child: FloatingActionButton(
-                onPressed: (){
-                  setState(() {
-                    clicks += 1;
-                  });
-                },
-                child: Icon(Icons.add),
-                
-              ),
+            FloatButton(
+
+              icon: Icons.add,
+              pressed: () => handleCount(1),
             ),
+
           ],
         ),
        
