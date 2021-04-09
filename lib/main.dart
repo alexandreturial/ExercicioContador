@@ -22,12 +22,22 @@ class _CouterScreenState extends State<CouterScreen> {
 
   var clicks = 0;  
 
-  void handleCount(int click){
-    if(clicks + click >= 0){
+  void handleCount(Function countFunction){
+    countFunction();
+  }
+
+  void add(){
       setState(() {
-        clicks += click;
+        clicks += 1;
+      });
+  }
+  void sub(){
+    if(clicks -1 >= 0){
+      setState(() {
+        clicks -=1;
       });
     }
+      
   }
 
   @override
@@ -59,14 +69,15 @@ class _CouterScreenState extends State<CouterScreen> {
           
           children: [
             FloatButton(
+              colorButton: Colors.red,
               icon: Icons.remove,
-              pressed: () => handleCount(-1)
+              pressed: () => handleCount(sub)
                 
             ),
             FloatButton(
 
               icon: Icons.add,
-              pressed: () => handleCount(1),
+              pressed: () => handleCount(add),
             ),
 
           ],
